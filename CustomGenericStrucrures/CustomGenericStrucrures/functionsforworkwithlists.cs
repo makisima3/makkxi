@@ -2,14 +2,12 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LinkedList;
-using DoublyLinkedList;
-using List;
+using CustomGenericStructures;
 using IList;
 
-namespace listfunc
+namespace functionsforworkwithlists
 {
-    public class listfunctions
+    public class functions
     {
         public static Random rnd = new Random();
 
@@ -23,9 +21,9 @@ namespace listfunc
 
         public static void ConsoleWriteList(IList<double> list)
         {
-            foreach (var c in list)
+            for (int i =0;i<list.Count;i++)
             {
-                Console.WriteLine(c.ToString());
+                Console.WriteLine(list[i]);
             }
         }
     }

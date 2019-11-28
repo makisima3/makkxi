@@ -2,21 +2,21 @@
 using System.Collections;
 
 
-namespace List
+namespace CustomGenericStructures
 {
-    public class List<T> : IList<T>, System.Collections.Generic.IEnumerable<T>
+    public class List<T> : IList<T>
     {
+        public int Count { get { return count; } }
+
         private T[] array = new T[0];
+
+        private int count;
 
         public T this[int i]
         {
             get => array[i];
             set => array[i] = value;
         }
-
-        private int count;
-
-        public int Count { get { return count; } }
 
         public void Add(T data)
         {
@@ -93,21 +93,6 @@ namespace List
             }
             array = array1;
             count = array.Length;
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IEnumerable)this).GetEnumerator();
-        }
-
-        System.Collections.Generic.IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()
-        {
-            IEnumerator ie = array.GetEnumerator();
-            while (ie.MoveNext())
-            {
-                T item = (T)ie.Current;
-                yield return item;
-            }
         }
     }
 }

@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using IList;
-namespace DoublyLinkedList
+namespace CustomGenericStructures
 {
-    public class DoublyLinkedList<T> : System.Collections.Generic.IEnumerable<T>, IList<T>
+    public class DoublyLinkedList<T> : IList<T>
     {
+        public int Count { get { return count; } }
+
+        public bool IsEmpty { get { return count == 0; } }
+
         private class DoublyNode<T>
         {
             public DoublyNode(T data)
@@ -19,10 +23,19 @@ namespace DoublyLinkedList
 
         DoublyNode<T> tail;
 
+        DoublyNode<T> current;
+
+        DoublyNode<T> next;
+
         public T this[int i]
         {
-            get => head.Data;
-            set => head.Data = value;
+            get
+            {
+                current = next;
+                next = next.Next;
+                return current.Data;
+            }
+            set => current.Data = value;
         }
 
         int count;
@@ -39,6 +52,7 @@ namespace DoublyLinkedList
             }
             tail = node;
             count++;
+            next = head;
         }
 
         public void AppendFirst(T data)
@@ -52,6 +66,7 @@ namespace DoublyLinkedList
             else
                 temp.Previous = node;
             count++;
+            next = head;
         }
 
         public bool Remove(T data)
@@ -88,20 +103,18 @@ namespace DoublyLinkedList
                     head = current.Next;
                 }
                 count--;
+                next = head;
                 return true;
             }
             return false;
         }
-
-        public int Count { get { return count; } }
-
-        public bool IsEmpty { get { return count == 0; } }
 
         public void Clear()
         {
             head = null;
             tail = null;
             count = 0;
+            next = null;
         }
 
         public bool Contains(T data)
@@ -114,31 +127,6 @@ namespace DoublyLinkedList
                 current = current.Next;
             }
             return false;
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IEnumerable)this).GetEnumerator();
-        }
-
-        System.Collections.Generic.IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()
-        {
-            DoublyNode<T> current = head;
-            while (current != null)
-            {
-                yield return current.Data;
-                current = current.Next;
-            }
-        }
-
-        public System.Collections.Generic.IEnumerable<T> BackEnumerator()
-        {
-            DoublyNode<T> current = tail;
-            while (current != null)
-            {
-                yield return current.Data;
-                current = current.Previous;
-            }
         }
     }
 }

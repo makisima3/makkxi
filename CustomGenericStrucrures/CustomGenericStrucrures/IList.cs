@@ -1,6 +1,6 @@
 ﻿namespace IList
 {
-        public interface IList<T> : System.Collections.Generic.IEnumerable<T>
+        public interface IList<T> 
     {
             void Add(T data);
             bool Remove(T data);

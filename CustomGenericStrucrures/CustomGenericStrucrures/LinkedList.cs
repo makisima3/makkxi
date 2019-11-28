@@ -2,10 +2,13 @@
 using System.Collections;
 
 
-namespace LinkedList
+namespace CustomGenericStructures
 {
-    public class LinkedList<T> : System.Collections.Generic.IEnumerable<T>, IList<T>
+    public class LinkedList<T> : IList<T>
     {
+        public int Count { get { return count; } }
+        public bool IsEmpty { get { return count == 0; } }
+
         private class Node<T>
         {
             public Node(T data)
@@ -16,16 +19,15 @@ namespace LinkedList
             public Node<T> Next { get; set; }
         }
 
-        Node<T> head;
+         Node<T> head;
 
-        Node<T> tail;
+         Node<T> tail;
+
         int count;
 
-        public T this[int i]
-        {
-            get => head.Data;
-            set => head.Data = value;
-        }
+        private Node<T> current = null;
+
+        private Node<T> next;
 
         public void Add(T data)
         {
@@ -38,7 +40,20 @@ namespace LinkedList
             tail = node;
 
             count++;
+            next = head;
         }
+
+        public T this[int i]
+        {   
+            get
+            {
+                current = next;
+                next = next.Next;
+                return current.Data;
+            }
+            set => current.Data = value;
+        }
+
 
         public bool Remove(T data)
         {
@@ -66,6 +81,7 @@ namespace LinkedList
                             tail = null;
                     }
                     count--;
+                    next = head;
                     return true;
                 }
 
@@ -75,13 +91,11 @@ namespace LinkedList
             return false;
         }
 
-        public int Count { get { return count; } }
-        public bool IsEmpty { get { return count == 0; } }
-
         public void Clear()
         {
             head = null;
             tail = null;
+            next = null;
             count = 0;
         }
 
@@ -105,21 +119,9 @@ namespace LinkedList
             if (count == 0)
                 tail = head;
             count++;
+            next = head;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IEnumerable)this).GetEnumerator();
-        }
-
-        System.Collections.Generic.IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()
-        {
-            Node<T> current = head;
-            while (current != null)
-            {
-                yield return current.Data;
-                current = current.Next;
-            }
-        }
+        
     }
 }
