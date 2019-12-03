@@ -4,10 +4,6 @@ namespace CustomGenericStructures
 {
     public class DoublyLinkedList<T> : IList<T>
     {
-        public int Count { get { return count; } }
-
-        public bool IsEmpty { get { return count == 0; } }
-
         private class DoublyNode<T>
         {
             public DoublyNode(T data)
@@ -19,40 +15,49 @@ namespace CustomGenericStructures
             public DoublyNode<T> Next { get; set; }
         }
 
-        DoublyNode<T> head;
-
-        DoublyNode<T> tail;
-
-        DoublyNode<T> current;
-
-        DoublyNode<T> next;
-
+        public int Count { get { return count; } }
+        public bool IsEmpty { get { return count == 0; } }
         public T this[int i]
         {
             get
             {
-                current = next;
-                next = next.Next;
+                current = head;
+                for (int g = 0; g < i; g++)
+                {
+                    current = current.Next;
+                }
                 return current.Data;
             }
-            set => current.Data = value;
+            set
+            {
+                current = head;
+                for (int g = 0; g < i; g++)
+                {
+                    current.Data = value;
+                }
+            }
         }
 
-        int count;
+        private DoublyNode<T> head;
+        private DoublyNode<T> current;
+        private int count;
+
         public void Add(T data)
         {
             DoublyNode<T> node = new DoublyNode<T>(data);
-
+            DoublyNode<T> current;
             if (head == null)
                 head = node;
             else
             {
-                tail.Next = node;
-                node.Previous = tail;
+                current = head;
+                while (current.Next != null)
+                {
+                    current = current.Next;
+                }
+                current.Next = node;
             }
-            tail = node;
             count++;
-            next = head;
         }
 
         public void AppendFirst(T data)
@@ -61,19 +66,14 @@ namespace CustomGenericStructures
             DoublyNode<T> temp = head;
             node.Next = temp;
             head = node;
-            if (count == 0)
-                tail = head;
-            else
-                temp.Previous = node;
+            temp.Previous = node;
             count++;
-            next = head;
         }
 
         public bool Remove(T data)
         {
             DoublyNode<T> current = head;
-
-
+            
             while (current != null)
             {
                 if (current.Data.Equals(data))
@@ -89,11 +89,6 @@ namespace CustomGenericStructures
                 {
                     current.Next.Previous = current.Previous;
                 }
-                else
-                {
-                    tail = current.Previous;
-                }
-
                 if (current.Previous != null)
                 {
                     current.Previous.Next = current.Next;
@@ -103,7 +98,6 @@ namespace CustomGenericStructures
                     head = current.Next;
                 }
                 count--;
-                next = head;
                 return true;
             }
             return false;
@@ -112,9 +106,7 @@ namespace CustomGenericStructures
         public void Clear()
         {
             head = null;
-            tail = null;
             count = 0;
-            next = null;
         }
 
         public bool Contains(T data)

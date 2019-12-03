@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 using CustomGenericStructures;
 using IList;
 
-namespace functionsforworkwithlists
+namespace FunctionsForWorkWithLists
 {
-    public class functions
+    public class Functions
     {
-        public static Random rnd = new Random();
+        private static Random rnd = new Random();
 
         public static void RandomFill(IList<double> list, int count)
         {
             for (int i = 0; i < count; i++)
             {
-                list.Add(Math.Round(rnd.NextDouble(), 2));
+                list.Add(rnd.NextDouble());
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using CustomGenericStructures;
-using functionsforworkwithlists;
+using FunctionsForWorkWithLists;
 
 namespace Programm
 {
@@ -11,28 +11,29 @@ namespace Programm
             Console.WriteLine("Введите число элементов списка");
             int count = Convert.ToInt32(Console.ReadLine());
             List<double> L = new List<double>();
-            functions.RandomFill(L, count);
+            Functions.RandomFill(L, count);
             Console.WriteLine("Вывод элементов списка(нажмите enter для продолжения)");
-            functions.ConsoleWriteList(L);
+            Functions.ConsoleWriteList(L);
             Console.WriteLine("Кол-во =" + L.Count);
             Console.ReadKey();
 
             Console.WriteLine("Введите число элементов связного списка");
             count = Convert.ToInt32(Console.ReadLine());
             LinkedList<double> LList = new LinkedList<double>();
-            functions.RandomFill(LList, count);
+            Functions.RandomFill(LList, count);
             Console.WriteLine("Вывод элементов связного списка(нажмите enter для продолжения)");
-            functions.ConsoleWriteList(LList);
+            Functions.ConsoleWriteList(LList);
             Console.WriteLine("Кол-во =" + LList.Count);
             Console.ReadKey();
 
             Console.WriteLine("Введите число элементов двусвязного списка");
             count = Convert.ToInt32(Console.ReadLine());
             DoublyLinkedList<double> DLList = new DoublyLinkedList<double>();
-            functions.RandomFill(DLList, count);
+            Functions.RandomFill(DLList, count);
             Console.WriteLine("Вывод элементов двусвязного списка");
-            functions.ConsoleWriteList(DLList);
+            Functions.ConsoleWriteList(DLList);
             Console.WriteLine("Кол-во =" + DLList.Count);
+            DLList.AppendFirst(Convert.ToDouble(Console.ReadLine()));
             Console.ReadKey();
         }
     }

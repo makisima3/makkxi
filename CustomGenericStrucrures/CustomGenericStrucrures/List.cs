@@ -7,16 +7,14 @@ namespace CustomGenericStructures
     public class List<T> : IList<T>
     {
         public int Count { get { return count; } }
-
-        private T[] array = new T[0];
-
-        private int count;
-
         public T this[int i]
-        {
-            get => array[i];
-            set => array[i] = value;
-        }
+                {
+                    get => array[i];
+                    set => array[i] = value;
+                }
+        
+        private int count;
+        private T[] array = new T[0];
 
         public void Add(T data)
         {
@@ -62,7 +60,6 @@ namespace CustomGenericStructures
             {
                 return false;
             }
-            
         }
 
         public void Clear()

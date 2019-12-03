@@ -6,9 +6,6 @@ namespace CustomGenericStructures
 {
     public class LinkedList<T> : IList<T>
     {
-        public int Count { get { return count; } }
-        public bool IsEmpty { get { return count == 0; } }
-
         private class Node<T>
         {
             public Node(T data)
@@ -19,41 +16,51 @@ namespace CustomGenericStructures
             public Node<T> Next { get; set; }
         }
 
-         Node<T> head;
-
-         Node<T> tail;
-
-        int count;
-
-        private Node<T> current = null;
-
-        private Node<T> next;
-
-        public void Add(T data)
-        {
-            Node<T> node = new Node<T>(data);
-
-            if (head == null)
-                head = node;
-            else
-                tail.Next = node;
-            tail = node;
-
-            count++;
-            next = head;
-        }
-
+        public int Count { get { return count; } }
+        public bool IsEmpty { get { return count == 0; } }
         public T this[int i]
         {   
             get
             {
-                current = next;
-                next = next.Next;
+                current = head;
+                for(int g = 0;g < i;g++)
+                {
+                    current = current.Next;
+                }
                 return current.Data;
             }
-            set => current.Data = value;
+            set
+            {
+                current = head;
+                for (int g = 0; g < i; g++)
+                {
+                    current.Data = value;
+                }
+            }
         }
 
+        private Node<T> head;
+        private Node<T> current;
+        private int count;
+
+        public void Add(T data)
+        {
+            Node<T> node = new Node<T>(data);
+            Node<T> current;
+
+            if (head == null)
+                head = node;
+            else
+            {
+                current = head;
+                while(current.Next !=null)
+                {
+                    current = current.Next;
+                }
+                current.Next = node;
+            }
+            count++;
+           }
 
         public bool Remove(T data)
         {
@@ -69,22 +76,14 @@ namespace CustomGenericStructures
                     {
 
                         previous.Next = current.Next;
-
-
-                        if (current.Next == null)
-                            tail = previous;
                     }
                     else
                     {
                         head = head.Next;
-                        if (head == null)
-                            tail = null;
                     }
                     count--;
-                    next = head;
                     return true;
                 }
-
                 previous = current;
                 current = current.Next;
             }
@@ -94,14 +93,13 @@ namespace CustomGenericStructures
         public void Clear()
         {
             head = null;
-            tail = null;
-            next = null;
             count = 0;
         }
 
         public bool Contains(T data)
         {
             Node<T> current = head;
+
             while (current != null)
             {
                 if (current.Data.Equals(data))
@@ -116,12 +114,7 @@ namespace CustomGenericStructures
             Node<T> node = new Node<T>(data);
             node.Next = head;
             head = node;
-            if (count == 0)
-                tail = head;
             count++;
-            next = head;
         }
-
-        
     }
 }
