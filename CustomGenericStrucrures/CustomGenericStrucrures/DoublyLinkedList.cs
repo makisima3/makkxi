@@ -1,5 +1,6 @@
-﻿using System.Collections;
-using IList;
+﻿using System;
+using System.Collections;
+
 namespace CustomGenericStructures
 {
     public class DoublyLinkedList<T> : IList<T>
@@ -15,26 +16,34 @@ namespace CustomGenericStructures
             public DoublyNode<T> Next { get; set; }
         }
 
-        public int Count { get { return count; } }
-        public bool IsEmpty { get { return count == 0; } }
-        public T this[int i]
+        public int Count => count;
+        public bool IsEmpty => count == 0;
+        public T this[int index]
         {
             get
             {
                 current = head;
-                for (int g = 0; g < i; g++)
-                {
-                    current = current.Next;
-                }
+                if (index > -1 && index < count)
+                    for (int g = 0; g < index; g++)
+                    {
+                        current = current.Next;
+                    } 
+                else
+                    throw new IndexOutOfRangeException();
                 return current.Data;
             }
             set
             {
                 current = head;
-                for (int g = 0; g < i; g++)
-                {
-                    current.Data = value;
-                }
+                if (index > -1 && index < count)
+                    for (int g = 0; g <= index; g++)
+                    {
+                        if (g == index)
+                            current.Data = value;
+                        current = current.Next;
+                    }
+                else
+                    throw new IndexOutOfRangeException();
             }
         }
 
@@ -46,6 +55,7 @@ namespace CustomGenericStructures
         {
             DoublyNode<T> node = new DoublyNode<T>(data);
             DoublyNode<T> current;
+
             if (head == null)
                 head = node;
             else
@@ -56,6 +66,7 @@ namespace CustomGenericStructures
                     current = current.Next;
                 }
                 current.Next = node;
+                node.Previous = current;
             }
             count++;
         }
@@ -84,7 +95,6 @@ namespace CustomGenericStructures
             }
             if (current != null)
             {
-
                 if (current.Next != null)
                 {
                     current.Next.Previous = current.Previous;
@@ -98,6 +108,7 @@ namespace CustomGenericStructures
                     head = current.Next;
                 }
                 count--;
+                
                 return true;
             }
             return false;

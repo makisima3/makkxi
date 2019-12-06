@@ -1,12 +1,12 @@
-﻿namespace IList
+﻿namespace CustomGenericStructures
 {
     public interface IList<T> 
     {       
         int Count { get; }
-        T this[int i]
+        T this[int index]
         {
-                get;
-                set;
+            get;
+            set;
         }
         void Add(T data);
         bool Remove(T data);

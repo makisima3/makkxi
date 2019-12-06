@@ -1,6 +1,5 @@
-﻿using IList;
+﻿using System;
 using System.Collections;
-
 
 namespace CustomGenericStructures
 {
@@ -16,29 +15,37 @@ namespace CustomGenericStructures
             public Node<T> Next { get; set; }
         }
 
-        public int Count { get { return count; } }
-        public bool IsEmpty { get { return count == 0; } }
-        public T this[int i]
-        {   
+        public int Count => count;
+        public bool IsEmpty => count == 0;
+        public T this[int index]
+        {
             get
             {
                 current = head;
-                for(int g = 0;g < i;g++)
-                {
-                    current = current.Next;
-                }
+                if(index > -1 && index < count)
+                    for (int g = 0; g < index; g++)
+                    {
+                      current = current.Next;
+                    }
+                else
+                    throw new IndexOutOfRangeException();
                 return current.Data;
             }
             set
             {
                 current = head;
-                for (int g = 0; g < i; g++)
-                {
-                    current.Data = value;
+                if(index > -1 && index < count)
+                for (int g = 0; g <= index; g++)
+                {   
+                    if(g == index)
+                        current.Data = value;
+                    current = current.Next;
                 }
+                else
+                    throw new IndexOutOfRangeException();
             }
         }
-
+        
         private Node<T> head;
         private Node<T> current;
         private int count;
@@ -71,10 +78,8 @@ namespace CustomGenericStructures
             {
                 if (current.Data.Equals(data))
                 {
-
                     if (previous != null)
                     {
-
                         previous.Next = current.Next;
                     }
                     else

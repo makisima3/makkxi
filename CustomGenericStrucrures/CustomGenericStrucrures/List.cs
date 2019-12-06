@@ -1,17 +1,15 @@
-﻿using IList;
-using System.Collections;
-
+﻿using System.Collections;
 
 namespace CustomGenericStructures
 {
     public class List<T> : IList<T>
     {
-        public int Count { get { return count; } }
-        public T this[int i]
-                {
-                    get => array[i];
-                    set => array[i] = value;
-                }
+        public int Count => count;
+        public T this[int index]
+        {
+            get => array[index];
+            set => array[index] = value;
+        }
         
         private int count;
         private T[] array = new T[0];
@@ -32,6 +30,7 @@ namespace CustomGenericStructures
         {
             int index = -1;
             T[] array1 = new T[array.Length - 1];
+
             for (int i = 0; i < array.Length; i++)
             {
                 if (array[i].Equals(data))

@@ -3,11 +3,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CustomGenericStructures;
-using IList;
 
-namespace FunctionsForWorkWithLists
+namespace Functions
 {
-    public class Functions
+    public class FunctionsForWorkingWithLists
     {
         private static Random rnd = new Random();
 
@@ -21,7 +20,7 @@ namespace FunctionsForWorkWithLists
 
         public static void ConsoleWriteList(IList<double> list)
         {
-            for (int i =0;i<list.Count;i++)
+            for (int i = 0;i < list.Count;i++)
             {
                 Console.WriteLine(list[i]);
             }

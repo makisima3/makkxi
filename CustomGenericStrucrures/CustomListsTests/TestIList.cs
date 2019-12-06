@@ -1,4 +1,4 @@
-﻿using IList;
+﻿using CustomGenericStructures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 static class TestIList
