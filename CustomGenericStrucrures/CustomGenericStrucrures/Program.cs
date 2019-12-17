@@ -1,6 +1,6 @@
-﻿using System;
-using CustomGenericStructures;
+﻿using CustomGenericStructures;
 using Functions;
+using System;
 
 class Program
 {
@@ -8,30 +8,29 @@ class Program
     {
         Console.WriteLine("Введите число элементов списка");
         int count = Convert.ToInt32(Console.ReadLine());
-        List<double> L = new List<double>();
-        FunctionsForWorkingWithLists.RandomFill(L, count);
+        List<double> list = new List<double>();
+        FunctionsForWorkingWithLists.RandomFill(list, count);
         Console.WriteLine("Вывод элементов списка(нажмите enter для продолжения)");
-        FunctionsForWorkingWithLists.ConsoleWriteList(L);
-        Console.WriteLine("Кол-во =" + L.Count);
+        FunctionsForWorkingWithLists.ConsoleWriteList(list);
+        Console.WriteLine("Кол-во =" + list.Count);
         Console.ReadKey();
 
         Console.WriteLine("Введите число элементов связного списка");
         count = Convert.ToInt32(Console.ReadLine());
-        LinkedList<double> LList = new LinkedList<double>();
-        FunctionsForWorkingWithLists.RandomFill(LList, count);
+        LinkedList<double> linkedList = new LinkedList<double>();
+        FunctionsForWorkingWithLists.RandomFill(linkedList, count);
         Console.WriteLine("Вывод элементов связного списка(нажмите enter для продолжения)");
-        FunctionsForWorkingWithLists.ConsoleWriteList(LList);
-        Console.WriteLine("Кол-во =" + LList.Count);
+        FunctionsForWorkingWithLists.ConsoleWriteList(linkedList);
+        Console.WriteLine("Кол-во =" + linkedList.Count);
         Console.ReadKey();
 
         Console.WriteLine("Введите число элементов двусвязного списка");
         count = Convert.ToInt32(Console.ReadLine());
-        DoublyLinkedList<double> DLList = new DoublyLinkedList<double>();
-        FunctionsForWorkingWithLists.RandomFill(DLList, count);
+        DoublyLinkedList<double> doublyLinkedList = new DoublyLinkedList<double>();
+        FunctionsForWorkingWithLists.RandomFill(doublyLinkedList, count);
         Console.WriteLine("Вывод элементов двусвязного списка");
-        FunctionsForWorkingWithLists.ConsoleWriteList(DLList);
-        Console.WriteLine("Кол-во =" + DLList.Count);
+        FunctionsForWorkingWithLists.ConsoleWriteList(doublyLinkedList);
+        Console.WriteLine("Кол-во =" + doublyLinkedList.Count);
         Console.ReadKey();
     }
 }
-

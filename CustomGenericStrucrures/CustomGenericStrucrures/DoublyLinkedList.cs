@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 
 namespace CustomGenericStructures
 {
@@ -23,27 +22,39 @@ namespace CustomGenericStructures
             get
             {
                 current = head;
-                if (index > -1 && index < count)
+
+                if ((index < 0) || (index > count))
+                {
+                    throw new IndexOutOfRangeException();
+                }
+                else
+                {
                     for (int g = 0; g < index; g++)
                     {
                         current = current.Next;
-                    } 
-                else
-                    throw new IndexOutOfRangeException();
+                    }
+                }
+
                 return current.Data;
             }
             set
             {
                 current = head;
+
                 if (index > -1 && index < count)
                     for (int g = 0; g <= index; g++)
                     {
                         if (g == index)
+                        {
                             current.Data = value;
+                        }
+
                         current = current.Next;
                     }
                 else
+                {
                     throw new IndexOutOfRangeException();
+                }
             }
         }
 
@@ -57,7 +68,9 @@ namespace CustomGenericStructures
             DoublyNode<T> current;
 
             if (head == null)
+            {
                 head = node;
+            }
             else
             {
                 current = head;
@@ -68,6 +81,7 @@ namespace CustomGenericStructures
                 current.Next = node;
                 node.Previous = current;
             }
+
             count++;
         }
 
@@ -75,6 +89,7 @@ namespace CustomGenericStructures
         {
             DoublyNode<T> node = new DoublyNode<T>(data);
             DoublyNode<T> temp = head;
+
             node.Next = temp;
             head = node;
             temp.Previous = node;
@@ -84,13 +99,14 @@ namespace CustomGenericStructures
         public bool Remove(T data)
         {
             DoublyNode<T> current = head;
-            
+
             while (current != null)
             {
                 if (current.Data.Equals(data))
                 {
                     break;
                 }
+
                 current = current.Next;
             }
             if (current != null)
@@ -107,8 +123,8 @@ namespace CustomGenericStructures
                 {
                     head = current.Next;
                 }
+
                 count--;
-                
                 return true;
             }
             return false;
@@ -126,7 +142,10 @@ namespace CustomGenericStructures
             while (current != null)
             {
                 if (current.Data.Equals(data))
+                {
                     return true;
+                }
+
                 current = current.Next;
             }
             return false;

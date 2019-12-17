@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 
 namespace CustomGenericStructures
 {
@@ -22,30 +21,44 @@ namespace CustomGenericStructures
             get
             {
                 current = head;
-                if(index > -1 && index < count)
+
+                if ((index < 0) || (index > count))
+                {
+                    throw new IndexOutOfRangeException();
+                }
+                else
+                {
                     for (int g = 0; g < index; g++)
                     {
-                      current = current.Next;
+                        current = current.Next;
                     }
-                else
-                    throw new IndexOutOfRangeException();
+                }
+                
                 return current.Data;
             }
             set
             {
                 current = head;
-                if(index > -1 && index < count)
-                for (int g = 0; g <= index; g++)
-                {   
-                    if(g == index)
-                        current.Data = value;
-                    current = current.Next;
+
+                if (index > -1 && index < count)
+                {
+                    for (int g = 0; g <= index; g++)
+                    {
+                        if (g == index)
+                        {
+                            current.Data = value;
+                        }
+
+                        current = current.Next;
+                    }
                 }
                 else
+                {
                     throw new IndexOutOfRangeException();
+                }
             }
         }
-        
+
         private Node<T> head;
         private Node<T> current;
         private int count;
@@ -56,18 +69,23 @@ namespace CustomGenericStructures
             Node<T> current;
 
             if (head == null)
+            {
                 head = node;
+            }
             else
             {
                 current = head;
-                while(current.Next !=null)
+
+                while (current.Next != null)
                 {
                     current = current.Next;
                 }
+
                 current.Next = node;
             }
+
             count++;
-           }
+        }
 
         public bool Remove(T data)
         {
@@ -86,12 +104,15 @@ namespace CustomGenericStructures
                     {
                         head = head.Next;
                     }
+
                     count--;
                     return true;
                 }
+
                 previous = current;
                 current = current.Next;
             }
+
             return false;
         }
 
@@ -108,9 +129,13 @@ namespace CustomGenericStructures
             while (current != null)
             {
                 if (current.Data.Equals(data))
+                {
                     return true;
+                }
+
                 current = current.Next;
             }
+
             return false;
         }
 

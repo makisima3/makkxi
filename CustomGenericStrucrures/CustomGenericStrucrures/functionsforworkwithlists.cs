@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CustomGenericStructures;
+﻿using CustomGenericStructures;
+using System;
 
 namespace Functions
 {
@@ -20,7 +17,7 @@ namespace Functions
 
         public static void ConsoleWriteList(IList<double> list)
         {
-            for (int i = 0;i < list.Count;i++)
+            for (int i = 0; i < list.Count; i++)
             {
                 Console.WriteLine(list[i]);
             }

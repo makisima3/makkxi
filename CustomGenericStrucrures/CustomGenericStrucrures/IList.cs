@@ -1,7 +1,7 @@
 ﻿namespace CustomGenericStructures
 {
-    public interface IList<T> 
-    {       
+    public interface IList<T>
+    {
         int Count { get; }
         T this[int index]
         {
