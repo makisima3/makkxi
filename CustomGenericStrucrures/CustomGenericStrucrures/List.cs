@@ -7,33 +7,35 @@ namespace CustomGenericStructures
         public int Count => count;
         public T this[int index]
         {
-            get => arrayList[index];
-            set => arrayList[index] = value;
+            get => listItems[index];
+            set => listItems[index] = value;
         }
 
         private int count;
-        private T[] arrayList = Array.Empty<T>();
+        private T[] listItems = Array.Empty<T>();
 
         public void Add(T data)
         {
-            T[] temporaryArray = new T[arrayList.Length + 1];
-            for (int i = 0; i < arrayList.Length; i++)
+            T[] temporaryArray = new T[listItems.Length + 1];
+
+            for (int i = 0; i < listItems.Length; i++)
             {
-                temporaryArray[i] = arrayList[i];
+                temporaryArray[i] = listItems[i];
             }
-            temporaryArray[arrayList.Length] = data;
-            arrayList = temporaryArray;
-            count = arrayList.Length;
+
+            temporaryArray[listItems.Length] = data;
+            listItems = temporaryArray;
+            count = listItems.Length;
         }
 
         public bool Remove(T data)
         {
             int index = -1;
-            T[] temporaryArray = new T[arrayList.Length - 1];
+            T[] temporaryArray = new T[listItems.Length - 1];
 
-            for (int i = 0; i < arrayList.Length; i++)
+            for (int i = 0; i < listItems.Length; i++)
             {
-                if (arrayList[i].Equals(data))
+                if (listItems[i].Equals(data))
                 {
                     index = i;
                 }
@@ -44,15 +46,15 @@ namespace CustomGenericStructures
                 {
                     if (i >= index)
                     {
-                        temporaryArray[i] = arrayList[i + 1];
+                        temporaryArray[i] = listItems[i + 1];
                     }
                     else
                     {
-                        temporaryArray[i] = arrayList[i];
+                        temporaryArray[i] = listItems[i];
                     }
                 }
-                arrayList = temporaryArray;
-                count = arrayList.Length;
+                listItems = temporaryArray;
+                count = listItems.Length;
                 return true;
             }
             else
@@ -63,15 +65,15 @@ namespace CustomGenericStructures
 
         public void Clear()
         {
-            arrayList = Array.Empty<T>();
+            listItems = Array.Empty<T>();
             count = 0;
         }
 
         public bool Contains(T data)
         {
-            for (int i = 0; i < arrayList.Length; i++)
+            for (int i = 0; i < listItems.Length; i++)
             {
-                if (arrayList[i].Equals(data))
+                if (listItems[i].Equals(data))
                 {
                     return true;
                 }
@@ -81,15 +83,16 @@ namespace CustomGenericStructures
 
         public void AppendFirst(T data)
         {
-            T[] temporaryArray = new T[arrayList.Length + 1];
+            T[] temporaryArray = new T[listItems.Length + 1];
             temporaryArray[0] = data;
 
-            for (int i = 0; i < arrayList.Length; i++)
+            for (int i = 0; i < listItems.Length; i++)
             {
-                temporaryArray[i + 1] = arrayList[i];
+                temporaryArray[i + 1] = listItems[i];
             }
-            arrayList = temporaryArray;
-            count = arrayList.Length;
+
+            listItems = temporaryArray;
+            count = listItems.Length;
         }
     }
 }

@@ -22,39 +22,35 @@ namespace CustomGenericStructures
             {
                 current = head;
 
-                if ((index < 0) || (index > count))
+                if ((index < 0) || (index >= count))
                 {
                     throw new IndexOutOfRangeException();
                 }
-                else
+
+                for (int g = 0; g < index; g++)
                 {
-                    for (int g = 0; g < index; g++)
-                    {
-                        current = current.Next;
-                    }
+                    current = current.Next;
                 }
-                
+
                 return current.Data;
             }
             set
             {
                 current = head;
 
-                if (index > -1 && index < count)
-                {
-                    for (int g = 0; g <= index; g++)
-                    {
-                        if (g == index)
-                        {
-                            current.Data = value;
-                        }
-
-                        current = current.Next;
-                    }
-                }
-                else
+                if ((index < 0) || (index >= count))
                 {
                     throw new IndexOutOfRangeException();
+                }
+
+                for (int g = 0; g <= index; g++)
+                {
+                    if (g == index)
+                    {
+                        current.Data = value;
+                    }
+
+                    current = current.Next;
                 }
             }
         }
